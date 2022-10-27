@@ -49,6 +49,20 @@ int* XOR(int *divisor,int *dividend,int d1,int d2)
     }
     return rem2;
 }
+void reciever(int *recieved,int *generator,int a, int b)
+{
+    int *check=XOR(recieved,generator,a+b-1,b);
+    for(int i=0;i<b-1;i++)
+    {
+        if(check[i]!=0)
+        {
+            cout<<"error in message"<<endl;
+            return;
+        }
+    }
+    cout<<"No error in transmitted message"<<endl;
+    return;
+}
 void sender(int *a,int *b,int a1, int b1)
 {
     int s[a1+b1-1];
@@ -68,15 +82,9 @@ void sender(int *a,int *b,int a1, int b1)
     }
     cout<<endl;
     int l=0;
-    for (int i = a1; i < a1+b1-1; i++)
+    for (int i = a1; i < a1+b1-1; i++,l++)
     {
-        if(s[i]==remainder[l])
-        {
-            s[i]=0;
-        }
-        else{
-            s[i]=1;
-        }
+       s[i]=remainder[l];
     }
     cout<<"Transmitted message: ";
     for (int i = 0; i < a1+b1-1; i++)
@@ -86,30 +94,20 @@ void sender(int *a,int *b,int a1, int b1)
     cout<<endl;
     reciever(s,b,a1,b1);
 }
-
-void reciever(int *recieved,int *generator,int a, int b)
-{
-    int *check=XOR(recieved,generator,a+b-1,b);
-    for(int i=0;i<b-1;i++)
-    {
-        if(check[i]!=0)
-        {
-            cout<<"error in message"<<endl;
-            return;
-        }
-    }
-    cout<<"No error in transmitted message"<<endl;
-    return;
-}
 int main()
 {
     int n1;
     cout<<"Enter length of message: ";
     cin>>n1;
     int message[n1];
-    for(int i=0;i<n1;i++)
+    int mg=0;
+    int m1=n1;
+    cout<<"Enter the message: ";
+    cin>>mg;
+    while(mg)
     {
-        cin>>message[i];
+        message[--m1]=mg%10;
+        mg/=10;
     }
     cout<<endl;
     int n2;
