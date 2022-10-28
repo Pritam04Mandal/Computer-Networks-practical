@@ -51,6 +51,19 @@ int* XOR(int *divisor,int *dividend,int d1,int d2)
 }
 void reciever(int *recieved,int *generator,int a, int b)
 {
+    int noise;
+    cout<<"Enter the bit where you want to add noise(Enter -1 if don't): ";cin>>noise;
+    if(noise>=0)
+    {
+        cout<<"hell"<<endl;
+        if(recieved[noise-1]==1)
+        {
+            recieved[noise-1]=0;
+        }
+        else{
+            recieved[noise-1]=0;
+        }
+    }
     cout<<"Recieving......."<<endl;
     cout<<"Recieved message: ";
     for (int i = 0; i < a+b-1; i++)
@@ -93,19 +106,6 @@ void sender(int *a,int *b,int a1, int b1)
         cout<<s[i];
     }
     cout<<endl;
-    int noise;
-    cout<<"Enter the bit where you want to add noise(Enter -1 if don't): ";cin>>noise;
-    if(noise>=0)
-    {
-        cout<<"hell"<<endl;
-        if(s[noise-1]==1)
-        {
-            s[noise-1]=0;
-        }
-        else{
-            s[noise-1]=0;
-        }
-    }
     cout<<"Transmitting the message............"<<endl;
     reciever(s,b,a1,b1);
 }
